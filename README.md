@@ -2,7 +2,7 @@
 
 A complete machine learning web application for predicting Rossmann store sales using FastAPI and a modern web interface.
 
-## 🌟 Features
+## Features
 
 - **Single Store Prediction**: Get instant sales forecasts for individual stores
 - **Batch Predictions**: Process multiple predictions simultaneously
@@ -11,7 +11,7 @@ A complete machine learning web application for predicting Rossmann store sales 
 - **Model Information**: Detailed insights about the trained model
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -27,13 +27,13 @@ A complete machine learning web application for predicting Rossmann store sales 
                                                └─────────────────┘
 ```
 
-## 📋 Prerequisites
+## Prerequisites
 
 - **Python 3.8+** with pip
 - **Node.js 14+** with npm
 - **Git** (optional, for cloning)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Option 1: Automated Setup (Recommended)
 
@@ -71,7 +71,7 @@ npm start
 - API Documentation: http://localhost:8000/docs
 - API Health: http://localhost:8000/health
 
-## 📊 Usage Guide
+## Usage Guide
 
 ### Single Prediction
 
@@ -178,7 +178,7 @@ npm start
 # Navigate to http://localhost:3001
 ```
 
-## 🐳 Docker Deployment
+## Docker Deployment
 
 ### Build and Run API
 
@@ -194,7 +194,7 @@ docker run -p 8000:8000 rossmann-api
 docker-compose up -d
 ```
 
-## 🌐 Production Deployment
+## Production Deployment
 
 ### Platform Options
 
@@ -210,7 +210,7 @@ docker-compose up -d
 3. Configure CORS settings for your domain
 4. Set up SSL/TLS certificates
 
-## 📈 Model Information
+## Model Information
 
 - **Algorithm**: Random Forest Regressor
 - **Features**: 27 engineered features including:
@@ -224,7 +224,7 @@ docker-compose up -d
   - MAPE: ~10-15%
   - R²: ~0.85-0.90
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -259,32 +259,5 @@ export NODE_ENV=development
 npm run dev
 ```
 
-## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📞 Support
-
-For questions and support:
-- 📧 Email: support@datalentech.com
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/rossmann-forecasting/issues)
-- 📖 Documentation: [API Docs](http://localhost:8000/docs)
-
-## 🙏 Acknowledgments
-
-- Rossmann Store Sales dataset from Kaggle
-- FastAPI framework for the robust API
-- Express.js for the web server
-- Scikit-learn for machine learning capabilities
-
----
-
-**Made with ❤️ by DatalenTech**
