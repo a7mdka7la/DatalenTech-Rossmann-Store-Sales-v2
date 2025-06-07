@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rossmann Sales Forecasting</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Rossmann Sales Forecasting</span>
+                </div>
+                <div class="api-status" id="apiStatus">
+                    <span class="status-indicator" id="statusIndicator"></span>
+                    <span id="statusText">Checking API...</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1>Sales Prediction Platform</h1>
+                <p>Get accurate sales forecasts for Rossmann stores using machine learning</p>
+            </section>
+
+            <!-- Prediction Forms -->
+            <div class="prediction-container">
+                <!-- Single Prediction -->
+                <div class="prediction-card">
+                    <h2><i class="fas fa-calculator"></i> Single Store Prediction</h2>
+                    <form id="singlePredictionForm" class="prediction-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="store">Store ID</label>
+                                <input type="number" id="store" name="store" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" id="date" name="date" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="promo">Promotion</label>
+                                <select id="promo" name="promo" required>
+                                    <option value="0">No Promotion</option>
+                                    <option value="1">Promotion Active</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="stateHoliday">State Holiday</label>
+                                <select id="stateHoliday" name="state_holiday" required>
+                                    <option value="0">No Holiday</option>
+                                    <option value="a">Public Holiday</option>
+                                    <option value="b">Easter Holiday</option>
+                                    <option value="c">Christmas</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="schoolHoliday">School Holiday</label>
+                                <select id="schoolHoliday" name="school_holiday" required>
+                                    <option value="0">No School Holiday</option>
+                                    <option value="1">School Holiday</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="dayOfWeek">Day of Week</label>
+                                <select id="dayOfWeek" name="day_of_week">
+                                    <option value="">Auto-calculate</option>
+                                    <option value="1">Monday</option>
+                                    <option value="2">Tuesday</option>
+                                    <option value="3">Wednesday</option>
+                                    <option value="4">Thursday</option>
+                                    <option value="5">Friday</option>
+                                    <option value="6">Saturday</option>
+                                    <option value="7">Sunday</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-magic"></i>
+                            Predict Sales
+                        </button>
+                    </form>
+                    
+                    <!-- Single Prediction Result -->
+                    <div id="singleResult" class="result-container" style="display: none;">
+                        <h3>Prediction Result</h3>
+                        <div class="result-content">
+                            <div class="result-item">
+                                <span class="label">Store:</span>
+                                <span id="resultStore" class="value"></span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Date:</span>
+                                <span id="resultDate" class="value"></span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Forecasted Sales:</span>
+                                <span id="resultSales" class="value sales-value"></span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Confidence Score:</span>
+                                <span id="resultConfidence" class="value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Batch Prediction -->
+                <div class="prediction-card">
+                    <h2><i class="fas fa-list"></i> Batch Prediction</h2>
+                    <div class="batch-controls">
+                        <button type="button" id="addPrediction" class="btn btn-secondary">
+                            <i class="fas fa-plus"></i>
+                            Add Prediction
+                        </button>
+                        <button type="button" id="clearBatch" class="btn btn-outline">
+                            <i class="fas fa-trash"></i>
+                            Clear All
+                        </button>
+                    </div>
+                    
+                    <div id="batchPredictions" class="batch-predictions">
+                        <!-- Batch prediction items will be added here -->
+                    </div>
+                    
+                    <button type="button" id="submitBatch" class="btn btn-primary" style="display: none;">
+                        <i class="fas fa-rocket"></i>
+                        Run Batch Prediction
+                    </button>
+                    
+                    <!-- Batch Prediction Results -->
+                    <div id="batchResults" class="result-container" style="display: none;">
+                        <h3>Batch Results</h3>
+                        <div class="results-summary">
+                            <span>Total Predictions: <strong id="totalPredictions">0</strong></span>
+                        </div>
+                        <div id="batchResultsTable" class="results-table"></div>
+                        <button type="button" id="downloadResults" class="btn btn-outline">
+                            <i class="fas fa-download"></i>
+                            Download CSV
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Information -->
+            <section class="model-info-section">
+                <h2><i class="fas fa-info-circle"></i> Model Information</h2>
+                <div id="modelInfo" class="model-info">
+                    <div class="loading">Loading model information...</div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Rossmann Sales Forecasting Platform. Powered by FastAPI and Machine Learning.</p>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="spinner"></div>
+        <p>Processing prediction...</p>
+    </div>
+
+    <!-- Error Modal -->
+    <div id="errorModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Error</h3>
+                <button type="button" class="close-btn" onclick="closeErrorModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="errorMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline" onclick="closeErrorModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
