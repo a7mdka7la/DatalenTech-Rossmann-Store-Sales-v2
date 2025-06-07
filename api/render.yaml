@@ -1,0 +1,20 @@
+# Render.com deployment configuration
+# Place this file in the root of your repository
+
+# Build Command (leave empty for Python apps)
+build_command = ""
+
+# Start Command
+start_command = "uvicorn main:app --host 0.0.0.0 --port $PORT"
+
+# Environment
+environment = "python"
+
+# Python Version
+python_version = "3.9"
+
+# Auto-deploy
+auto_deploy = true
+
+# Health Check Path
+health_check_path = "/health"

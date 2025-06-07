@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  rossmann-api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../rossmann_random_forest_model.pkl:/app/rossmann_random_forest_model.pkl
+      - ../feature_scaler.pkl:/app/feature_scaler.pkl
+    environment:
+      - PYTHONPATH=/app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
